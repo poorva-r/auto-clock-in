@@ -11,21 +11,14 @@ load_dotenv()
 USERNAME = os.getenv("USER_NAME")
 PASSWORD = os.getenv("PASSWORD")
 
-# Chrome Profile Path
-chrome_profile_path = r"C:\Users\ASUS\AppData\Local\Google\Chrome\User Data"
-profile_directory = "Profile 3"  
-
 # Selenium Chrome Setup
 options = Options()
-options.add_argument(f"user-data-dir={chrome_profile_path}")
-options.add_argument(f"profile-directory={profile_directory}")
+options.add_argument("--remote-debugging-pipe")
 
 # Disable automation bar
 options.add_experimental_option("excludeSwitches", ["enable-automation"])
 options.add_experimental_option('useAutomationExtension', False)
 
-# Keep Chrome open after script ends
-options.add_experimental_option("detach", True)
 
 # Use Service with default chromedriver and options
 service = Service()
@@ -51,7 +44,7 @@ try:
     print("Clock-in button clicked.")
     time.sleep(2)
 
-    print("Clock-in completed. Chrome will remain open.")
+    input("Press Enter to exit and close Chrome...")
 
 except Exception as e:
     print(f"Error: {e}")
